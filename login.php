@@ -21,14 +21,13 @@
         $password = "Fill this field";
     }
 
-
         //5.1 hash password
         $password = md5($password);
 
         //5.2 add user
         //use password & email to check if user exists
 
-        $sql = "SELECT `id`, `email`, `password` FROM `users` WHERE email='$email' AND password='$password'";
+        $sql = "SELECT `id`, `email`, `password`, `user_type` FROM `users` WHERE email='$email' AND password='$password'";
 //        results from db
         $results = mysqli_query($conn, $sql);
         if (mysqli_num_rows($results) > 0) {
@@ -36,12 +35,22 @@
             while ($rows = mysqli_fetch_assoc($results)) {
                 $id = $rows['id'];
                 $email = $rows['email'];
+                $user_type = $rows['user_type'];
 //                creat session for user
                 session_start();
                 $_SESSION['Kipande'] = $id;
-                $_SESSION['logged in'] = true;
+                $_SESSION['loggedin'] = true;
+                $_SESSION['email'] = $email;
+
+
+                if($user_type == 'supplier'){
+                    $_SESSION['aina_ya_mtumizi'] = true;
+                }else{
+                    $_SESSION['aina_ya_mtumizi'] = false;
+                }
 //            return to index page
-                header("location:index.php");
+
+                header("location:index.php?msg_login");
                 exit();
             }
         } else {
