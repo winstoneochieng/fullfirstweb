@@ -2,8 +2,8 @@
     require 'header.php';
     require 'config.php';
 
-    $username=$$email=$password1=$password2=$user_type='';
-    $username_err=$$email_err=$password1_err=$password2_err='';
+    $username=$email=$password1=$password2=$user_type='';
+    $username_err=$email_err=$password1_err=$password2_err='';
     //steps
 //1.grab user data from form
 if (isset($_POST['btn_signup'])){
@@ -19,7 +19,7 @@ if (isset($_POST['btn_signup'])){
         $email_err = "Fill this field";
     }
     if (isset($_POST['user-type'])){
-        $email = $_POST['user-type'];
+        $user_type = $_POST['user-type'];
     }
     if (isset($_POST['password1'])){
         $password1 = $_POST['password1'];
@@ -36,7 +36,14 @@ if (isset($_POST['btn_signup'])){
         $password2_err = 'Password did not match!';
     }else{
         //4.check if user exists
-
+    $sql="SELECT * FROM `users` WHERE email='$email'";
+//    results from db
+    $results = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($results>0)){
+        //user exists,go to login
+        header("location:login.php");
+        exit();
+    }
         //5.add user into db
         //5.1 hash password
         $password1 = md5($password1);
