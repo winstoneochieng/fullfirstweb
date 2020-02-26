@@ -82,7 +82,7 @@ if(isset($_POST['btn_addProduct']) and isset($_FILES['uploadFile'])){
                         $id = $row['id'];
                         $title = $row['title'];
                         $price = $row['price'];
-                        $description = $row['desciption'];
+                        $desciption = $row['desciption'];
                         $time = $row['time_posted'];
 
                         echo "<td>$id</td>";
