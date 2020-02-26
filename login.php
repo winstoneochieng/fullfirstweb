@@ -80,7 +80,7 @@
                             <input type="password" name="password" class="form-control" required>
                         </div>
 
-                        <button class="btn btn-warning btn-block" name="btn_login">Login</button>
+                        <button class="btn btn-success btn-block" name="btn_login">Login</button>
                     </fieldset>
                 </form>
             </div>

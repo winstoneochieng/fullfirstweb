@@ -38,6 +38,7 @@
             }
             if(isset($_SESSION['loggedin'])){
                 //if logged in
+                echo $_SESSION['Kipande'];
                 echo '
                    <li class="nav-item">
                         <a class="nav-link" href="logout.php">Logout</a>
